@@ -1,2 +1,34 @@
 # CommBase
-a platform for all your communication needs
+
+## Date: 10/11/2021
+
+### By: Tanner Mitchell
+
+[Github](https://github.com/BtSquared) | [LinkedIn](https://www.linkedin.com/in/tanner-mitchell-836130152/) | [Trello]()
+
+***Description***
+
+a platform for all your communication needs with user created and maintained servers create and manage your own community to your own wants and needs
+
+***Technologies Used***
+ - Vue
+ - Express
+ - Mongoose
+ - MongoDB
+ - Auth0
+ - AWS S3 Bucket
+ - websocket
+ - webRTC????????????????????(BIG FAT MAYBE)
+
+***Getting Started***
+
+
+
+***Screenshots***
+
+
+***future updates***
+
+
+***Credits***
+

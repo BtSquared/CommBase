@@ -4,7 +4,7 @@
 
 ### By: Tanner Mitchell
 
-[Github](https://github.com/BtSquared) | [LinkedIn](https://www.linkedin.com/in/tanner-mitchell-836130152/) | [Trello]()
+[Github](https://github.com/BtSquared) | [LinkedIn](https://www.linkedin.com/in/tanner-mitchell-836130152/) | [Trello](https://trello.com/b/9rqHdS4B/commbase)
 
 ***Description***
 
@@ -18,7 +18,6 @@ a platform for all your communication needs with user created and maintained ser
  - Auth0
  - AWS S3 Bucket
  - websocket
- - webRTC????????????????????(BIG FAT MAYBE)
 
 ***Getting Started***
 

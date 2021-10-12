@@ -6,8 +6,6 @@ const PostSchema = require('./Post')
 
 User = mongoose.model('users', UserSchema)
 Server = mongoose.model('servers', ServerSchema)
-Channel = mongoose.model('channels', ChannelSchema)
-Post = mongoose.model('post', PostSchema)
 
 module.exports = {
   User,

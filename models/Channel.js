@@ -1,9 +1,12 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const Post = require('./Post')
 
 const Channel = new Schema(
   {
-    permission: { type: Array, required: true }
+    name: { type: String, require: true },
+    permission: { type: Array, required: true, default: [] },
+    posts: [Post]
   },
   {
     timestamps: true

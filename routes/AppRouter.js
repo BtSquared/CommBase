@@ -1,10 +1,7 @@
 const { Router } = require('express')
-
+const user = require('./userRouter')
 const AppRouter = Router()
 
-// app.get('/', (req, res) => {
-//   console.log(req.oidc.isAuthenticated())
-//   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
-// })
+AppRouter.use('/user', user)
 
 module.exports = AppRouter

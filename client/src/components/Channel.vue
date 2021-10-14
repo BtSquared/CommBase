@@ -1,5 +1,7 @@
 <template>
-  <MessageBoard />
+  <div>
+    <MessageBoard />
+  </div>
 </template>
 
 <script>

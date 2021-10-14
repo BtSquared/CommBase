@@ -39,6 +39,15 @@ export default {
         content: this.NewPostContent
       })
       this.NewPostContent = ''
+    },
+    async handlePostEdit(postId, content) {
+      const res = await axios.put(`${BASE_URL}post/edit`, {
+        serverId: this.serverId,
+        channelId: this.channelId,
+        postId: postId,
+        content: content
+      })
+      
     }
   }
 }

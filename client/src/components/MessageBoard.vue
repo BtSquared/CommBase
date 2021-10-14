@@ -1,16 +1,23 @@
 <template>
-  <div class="home">
-  
+  <div>
+    <div>
+    </div>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: "Home",
+  name: "MessgeBoard",
   components: {
 
   },
+  prop: {
+    posts: []
+  },
+  data: () => ({
+
+  }),
   methods: {
 
   }

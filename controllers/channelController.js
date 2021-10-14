@@ -11,8 +11,10 @@ const deleteChannel = async (req, res) => {
   const server = await Server.findById(req.body.serverId)
   await server.channels.id(req.body.channelId).remove()
   server.save()
+  res.send(`channel with the id of ${req.body.channelId} has been deleted`)
 }
 
 module.exports = {
-  createChannel
+  createChannel,
+  deleteChannel
 }

@@ -10,7 +10,6 @@ const router = Router()
 
 router.get('/finduser', userController.getUserById)
 router.post('/avatar', upload.single('avatar'), userController.uploadAvatar)
-router.post('/register', userController.createUser)
 router.delete('/delete', userController.removeUser)
 
 module.exports = router

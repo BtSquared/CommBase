@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-export const BASE_URL = 'http://localhost:3001/api'
+export const BASE_URL = 'http://localhost:8080/'
 const Client = Axios.create({ baseURL: BASE_URL })
 
 Client.interceptors.request.use(

@@ -21,6 +21,7 @@ const deleteChannel = async (req, res) => {
 }
 
 module.exports = {
+  getChannelById,
   createChannel,
   deleteChannel
 }

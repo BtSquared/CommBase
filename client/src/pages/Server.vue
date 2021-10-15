@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ServerChannelList :serverId="server._id" :channels="server.channels"/>
+    <ChannelList :serverId="server._id" :channels="server.channels"/>
     <div>
     </div>
   </div>
@@ -9,13 +9,13 @@
 <script>
 import axios from 'axios'
 import {BASE_URL} from '../globals'
-import ServerChannelList from '../components/ChannelList.vue'
+import ChannelList from '../components/ChannelList.vue'
 
 
 export default {
   name: "Server",
   components: {
-    ServerChannelList
+    ChannelList
   },
   data: () => ({
     server: {},

@@ -20,7 +20,8 @@ const routes = [
       {
         path: ':channelId',
         name: 'channel',
-        component: Channel
+        component: Channel,
+        props: true
       }
     ]
   }

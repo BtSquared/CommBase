@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import Client from '../services/api'
 
 export default {
   name: "Login",
@@ -25,6 +26,8 @@ export default {
   methods: {
     handleChange(e) {
       this.formData[e.target.name] = e.target.value
+    },
+    handleSubmit() {
     }
   }
 }

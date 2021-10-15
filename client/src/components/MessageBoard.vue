@@ -22,8 +22,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { BASE_URL } from '../globals'
+import Client from '../services/api'
 import PostForm from '../subComponents/PostForm.vue'
 import PostCard from '../subComponents/PostCard.vue'
 
@@ -48,18 +47,17 @@ export default {
       this.NewPostContent = value
     },
     async handleFormSubmit() {
-      const res = await axios.post(`${BASE_URL}/post/createpost`, {
+      const res = await Client.post(`${BASE_URL}/post/createpost`, {
         serverId: this.serverId,
         channelId:  this.channelId,
         userId: this.userId,
         content: this.NewPostContent
       })
       this.NewPostContent = ''
-      console.log(res)
       this.posts.push(res.data.posts[res.data.posts.length - 1])
     },
     async handlePostEdit(postId, content) {
-      const res = await axios.put(`${BASE_URL}/post/edit`, {
+      const res = await Client.put(`${BASE_URL}/post/edit`, {
         serverId: this.serverId,
         channelId: this.channelId,
         postId: postId,
@@ -69,7 +67,7 @@ export default {
       //needs more
     },
     async handlePostDelete(postId) {
-      const res = await axios.delete(`${BASE_URL}/post/remove`, { data: {
+      const res = await Client.delete(`${BASE_URL}/post/remove`, { data: {
         serverId: this.serverId,
         channelId: this.channelId,
         postId: postId

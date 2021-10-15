@@ -20,8 +20,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-import {BASE_URL} from '../globals'
+import Client from '../services/api'
 import ChannelList from '../components/ChannelList.vue'
 import MessageBoard from '../components/MessageBoard.vue'
 import ServerList from '../components/ServerList.vue'
@@ -40,7 +39,7 @@ export default {
   }),
   mounted: async function() {
     console.log(this.$route.params.serverId)
-    const res = await axios.get(`${BASE_URL}/server/findserver`, {
+    const res = await Client.get(`${BASE_URL}/server/findserver`, {
       params: {
         serverId: this.$route.params.serverId
       }

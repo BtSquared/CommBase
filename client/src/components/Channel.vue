@@ -5,8 +5,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-import {BASE_URL} from '../globals'
+import Client from '../services/api'
 import MessgeBoard from './MessageBoard.vue'
 
 export default {
@@ -19,7 +18,7 @@ export default {
     channel: Object
   }),
   mounted: async function() {
-    const res = await axios.get(`${BASE_URL}/channel/findchannel`, {serverId: this.$route.params.serverId, channelId: this.$route.params.channelId})
+    const res = await Client.get(`${BASE_URL}/channel/findchannel`, {serverId: this.$route.params.serverId, channelId: this.$route.params.channelId})
     console.log(res)
   }
 }

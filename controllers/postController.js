@@ -21,9 +21,9 @@ const editPost = async (req, res) => {
 const deletePost = async (req, res) => {
   const server = await Server.findById(req.body.serverId)
   const channel = await server.channels.id(req.body.channelId)
-  const post = await channel.posts.id(req.body.postId).remove()
+  await channel.posts.id(req.body.postId).remove()
   server.save()
-  res.send(`Post with the id of ${req.body.postId} has been de leted`)
+  res.send(`Post with the id of ${req.body.postId} has been deleted`)
 }
 
 module.exports = {

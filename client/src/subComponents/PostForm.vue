@@ -1,7 +1,11 @@
 <template>
   <div>
     <form @submit.prevent="handleSubmit">
-      <input @input="handleChange" :value="content" placeholder="Create a Message">
+      <input 
+        @input="handleChange" 
+        :value="content" 
+        placeholder="Create a Message"
+      />
     </form>
   </div>
 </template>

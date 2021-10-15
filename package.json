@@ -20,12 +20,14 @@
   },
   "homepage": "https://github.com/BtSquared/CommBase#readme",
   "dependencies": {
+    "aws-sdk": "^2.1008.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.10",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.13"

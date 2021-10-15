@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="deleted === false">
     <div>
       <div v-if="editMode">
         <input @input="handleChange" :value="content">
@@ -13,9 +13,10 @@
       </div>
     </div>
     <div>
-      <button v-if="editMode === true" @click="handleEdit" >Save Changes</button>
+      <button v-if="editMode === true" @click="handleEdit">Save Changes</button>
       <button v-else @click="toggleEdit">Edit</button>
-      <button>Delete</button>
+      <button v-if="deleteCheckToggle" @click="handleDelete">Are You Sure You Want To DELETE This Message</button>
+      <button v-else @click="deleteCheck">Delete</button>
     </div>
   </div>
 </template>
@@ -31,6 +32,8 @@ export default {
   },
   data: () => ({
     editMode: false,
+    deleteCheckToggle: false,
+    deleted: false
   }),
   methods: {
     toggleEdit() {
@@ -45,6 +48,10 @@ export default {
     },
     async handleDelete() {
       await this.$emit('handlePostDelete', this.postId)
+      this.deleted = true
+    },
+    deleteCheck() {
+      this.deleteCheckToggle = true
     }
   }
 }

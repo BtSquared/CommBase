@@ -1,7 +1,7 @@
 const { Server } = require('../models')
 
 const getServerById = async (req, res) => {
-  const server = await Server.find(req.body.serverId)
+  const server = await Server.findById(req.query.serverId)
   res.send(server)
 }
 

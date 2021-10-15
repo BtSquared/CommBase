@@ -3,6 +3,7 @@ const user = require('./userRouter')
 const server = require('./serverRouter')
 const channel = require('./channelRouter')
 const post = require('./postRouter')
+
 const AppRouter = Router()
 
 AppRouter.use('/user', user)

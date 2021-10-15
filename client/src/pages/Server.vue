@@ -3,9 +3,18 @@
     <div>
       <ServerList />
     </div>
-    <ChannelList @changeChannel="changeChannel" :serverId="server._id" :channels="server.channels"/>
+    <ChannelList 
+      @changeChannel="changeChannel" 
+      :serverId="server._id" 
+      :channels="server.channels"
+    />
     <div>
-      <MessageBoard :serverId="server._id" :channelName="selectedChannel.name" :channelId="selectedChannel._id" :posts="selectedChannel.posts" />
+      <MessageBoard 
+        :serverId="server._id" 
+        :channelName="selectedChannel.name" 
+        :channelId="selectedChannel._id" 
+        :posts="selectedChannel.posts" 
+      />
     </div>
   </div>
 </template>
@@ -30,11 +39,15 @@ export default {
     selectedChannel: {}
   }),
   mounted: async function() {
-    const res = await axios.get(`${BASE_URL}/server/findserver`, {serverId: this.$route.params.serverId })
-    this.server = res.data[0]
-    this.channels = res.data[0].channels
-    this.selectedChannel = res.data[0].channels[0]
-    console.log(res)
+    console.log(this.$route.params.serverId)
+    const res = await axios.get(`${BASE_URL}/server/findserver`, {
+      params: {
+        serverId: this.$route.params.serverId
+      }
+    })
+    this.server = res.data
+    this.channels = res.data.channels
+    this.selectedChannel = res.data.channels[0]
   },
   methods: {
     changeChannel(channel) {

@@ -13,8 +13,8 @@
       </div>
     </div>
     <div>
-      <button v-if="editMode" @click="toggleEdit" >Edit</button>
-      <button v-else @click="handlePostEdit">Save Changes</button>
+      <button v-if="editMode === true" @click="handleEdit" >Save Changes</button>
+      <button v-else @click="toggleEdit">Edit</button>
       <button>Delete</button>
     </div>
   </div>
@@ -30,18 +30,18 @@ export default {
     content: String
   },
   data: () => ({
-    editMode: true,
+    editMode: false,
   }),
   methods: {
     toggleEdit() {
-      this.editMode = false
+      this.editMode = true
     },
     handleChange(e) {
       this.content = e.target.value
     },
     async handleEdit() {
       await this.$emit('handlePostEdit', this.postId, this.content)
-      this.editMode = true
+      this.editMode = false
     },
     async handleDelete() {
       await this.$emit('handlePostDelete', this.postId)

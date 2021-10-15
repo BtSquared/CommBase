@@ -18,7 +18,7 @@ const routes = [
     component: Server,
     children: [
       {
-        path: '/:channelId',
+        path: ':channelId',
         name: 'channel',
         component: Channel
       }

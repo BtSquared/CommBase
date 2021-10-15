@@ -2,27 +2,30 @@
   <div>
     <ServerChannelList :serverId="server._id" :channels="server.channels"/>
     <div>
-      <Channel v-for="channel in channels" :key="channel._id" :serverId="server._id" :channel="channel" />
     </div>
   </div>
 </template>
 
 <script>
-import ServerChannelList from '../components/ServerChannelList.vue'
-import Channel from '../components/Channel.vue'
+import axios from 'axios'
+import {BASE_URL} from '../globals'
+import ServerChannelList from '../components/ChannelList.vue'
+
 
 export default {
   name: "Server",
   components: {
-    ServerChannelList,
-    Channel
+    ServerChannelList
   },
-  props: {
-    server: Object,
-    channels: Array
-  },
-  data: () => {
-
+  data: () => ({
+    server: {},
+    channels: []
+  }),
+  mounted: async function() {
+    const res = await axios.get(`${BASE_URL}/server/findserver`, {serverId: this.$route.params.serverId })
+    this.server = res.data[0]
+    this.channels = res.data[0].channels
+    console.log(res)
   },
   methods: {
 

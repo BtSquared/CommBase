@@ -17,7 +17,7 @@
 
 <script>
 import axios from 'axios'
-import {BASE_URL} from '../globals'
+import { BASE_URL } from '../globals'
 import PostForm from '../subComponents/PostForm.vue'
 import PostCard from '../subComponents/PostCard.vue'
 
@@ -27,7 +27,7 @@ export default {
     PostForm,
     PostCard
   },
-  prop: {
+  props: {
     serverId: String,
     channelName: String,
     channelId: String,

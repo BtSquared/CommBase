@@ -16,8 +16,8 @@ export default {
     serverId: String,
     channel: Object
   },
-  data: () => {
+  data: () => ({
 
-  },
+  }),
 }
 </script>

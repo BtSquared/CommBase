@@ -1,5 +1,11 @@
 const { Server } = require('../models')
 
+const getChannelById = async (req, res) => {
+  const server = await Server.findById(req.body.serverId)
+  const channel = await server.channels.id(req.body.channelId)
+  res.send(channel)
+}
+
 const createChannel = async (req, res) => {
   const server = await Server.findById(req.body.serverId)
   server.channels.push({ name: req.body.name })

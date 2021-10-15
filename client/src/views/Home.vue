@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <ServerList :servers="servers" />
     <Server v-for="server in servers" :key="server._id" :server="server" :channels="server.channels" />
   </div>
 </template>
@@ -8,11 +9,13 @@
 import axios from 'axios'
 import {BASE_URL} from '../globals'
 import Server from '../pages/Server.vue'
+import ServerList from '../components/ServerList.vue'
 
 export default {
   name: "Home",
   components: {
-    Server
+    Server,
+    ServerList
   },
   data: () => ({
     servers: []

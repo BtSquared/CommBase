@@ -7,12 +7,6 @@ const getUserById = async (req, res) => {
   res.send(user)
 }
 
-const createUser = async (req, res) => {
-  const user = await new User({ ...req.body })
-  await user.save()
-  res.send({ user })
-}
-
 const removeUser = async (req, res) => {
   console.log(req)
   const user = await User.findByIdAndDelete(req.body.userId)

@@ -18,7 +18,7 @@ export default {
     channel: Object
   }),
   mounted: async function() {
-    const res = await Client.get(`${BASE_URL}/channel/findchannel`, {serverId: this.$route.params.serverId, channelId: this.$route.params.channelId})
+    const res = await Client.get(`/channel/findchannel`, {serverId: this.$route.params.serverId, channelId: this.$route.params.channelId})
     console.log(res)
   }
 }

@@ -33,7 +33,7 @@ export default {
     }
   }),
   mounted: async function() {
-    const res = await Client.get(`${BASE_URL}/server/findserver`, {
+    const res = await Client.get(`/server/findserver`, {
       params: {
         serverId: "6165ff74a3ed534b0db53274"
       }
@@ -51,7 +51,7 @@ export default {
       for (const key in this.formData) {
         formData.append(key, this.formData[key])
       }
-      const res = await Client.post(`${BASE_URL}/user/avatar`, formData)
+      const res = await Client.post(`/user/avatar`, formData)
       console.log(res)
     },
   }

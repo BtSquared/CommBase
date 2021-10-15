@@ -39,7 +39,7 @@ export default {
   }),
   mounted: async function() {
     console.log(this.$route.params.serverId)
-    const res = await Client.get(`${BASE_URL}/server/findserver`, {
+    const res = await Client.get(`/server/findserver`, {
       params: {
         serverId: this.$route.params.serverId
       }

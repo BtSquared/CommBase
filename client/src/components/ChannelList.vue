@@ -1,7 +1,9 @@
 <template>
   <div>
     <div v-for="channel in channels" :key="channel._id">
-      <router-link :to="{ name: 'channel', params: { serverId: serverId, channelId: channel._id, channel: channel } }">{{channel.name}}</router-link> |
+      <div @click="handleClick(channel)">
+        {{channel.name}}
+      </div>
     </div>
   </div>
 </template>
@@ -13,6 +15,18 @@ export default {
   props: {
     serverId: String,
     channels: Array
+  },
+  methods: {
+    handleClick(channel) {
+      this.$emit('changeChannel', channel)
+      this.$router.push({ 
+        name: 'channel', 
+        params: { 
+          serverId: this.serverId, 
+          channelId: channel._id, 
+          channel: channel 
+        }})
+    }
   }
 }
 </script>

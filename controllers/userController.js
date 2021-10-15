@@ -42,7 +42,6 @@ const uploadAvatar = async (req, res) => {
 
 module.exports = {
   getUserById,
-  createUser,
   removeUser,
   uploadAvatar
 }

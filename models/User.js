@@ -8,7 +8,7 @@ const User = new Schema(
     passwordDigest: { type: String, required: true },
     servers: { type: Array, required: false, default: [] },
     roles: { type: Array, required: false, default: [] },
-    bio: { type: String, required: false },
+    bio: { type: String, required: false, default: '' },
     profilePicture: { type: String, required: false, default: 'default pfp' },
     banner: { type: String, required: false, default: 'default banner' }
   },

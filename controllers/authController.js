@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const User = require('../models/User')
 const middleware = require('../middleware')
 
 const Login = async (req, res) => {
@@ -10,8 +10,13 @@ const Login = async (req, res) => {
     ) {
       let payload = {
         id: user.id,
+        displayName: user.displayName,
         email: user.email,
-        userName: user.userName
+        servers: user.servers,
+        roles: user.roles,
+        bio: user.bio,
+        profilePicture: user.profilePicture,
+        banner: user.banner
       }
       let token = middleware.createToken(payload)
       return res.send({ user: payload, token })
@@ -24,10 +29,10 @@ const Login = async (req, res) => {
 
 const Register = async (req, res) => {
   try {
-    const { email, password, userName } = req.body
+    const { email, password, displayName } = req.body
     let passwordDigest = await middleware.hashPassword(password)
-    const user = await User.create({ email, passwordDigest, userName })
-    console.log(user)
+    const user = await new User({ email, passwordDigest, displayName })
+    user.save()
     res.send(user)
   } catch (error) {
     throw error
@@ -36,7 +41,7 @@ const Register = async (req, res) => {
 
 const UpdatePassword = async (req, res) => {
   try {
-    const user = await User.findOne({ where: { email: req.body.email } })
+    const user = await User.findById(req.body.userId)
     if (
       user &&
       (await middleware.comparePassword(
@@ -45,11 +50,14 @@ const UpdatePassword = async (req, res) => {
       ))
     ) {
       let passwordDigest = await middleware.hashPassword(req.body.newPassword)
-      await user.update({ passwordDigest })
+      user.passwordDigest = passwordDigest
+      user.save()
       res.send({ status: 'Success', msg: 'Password Updated' })
     }
     res.status(401).send({ status: 'Error', msg: 'Invalid Credentials' })
-  } catch {}
+  } catch (error) {
+    throw error
+  }
 }
 
 const CheckSession = async (req, res) => {

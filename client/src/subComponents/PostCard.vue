@@ -7,7 +7,7 @@
       <div v-else>
         <div>
           <!-- <img /> -->
-          <h2>{{userName}}</h2>
+          <!-- <h2>{{userName}}</h2> -->
         </div>
         <p>{{content}}</p>
       </div>
@@ -25,22 +25,23 @@
 export default {
   name: "PostCard",
   props: {
-    userName: String,
+    // userName: String,
     postId: String,
     content: String
   },
   data: () => ({
-    editMode: false,
+    editMode: true,
   }),
   methods: {
     toggleEdit() {
-      this.editMode = this.editMode ? false : true
+      this.editMode = false
     },
     handleChange(e) {
       this.content = e.target.value
     },
     async handleEdit() {
       await this.$emit('handlePostEdit', this.postId, this.content)
+      this.editMode = true
     },
     async handleDelete() {
       await this.$emit('handlePostDelete', this.postId)

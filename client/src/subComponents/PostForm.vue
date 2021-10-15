@@ -1,7 +1,7 @@
 <template>
   <div>
     <form @submit.prevent="handleSubmit">
-      <input @input="handleChange" :value="content" placeholder="Message {{channelName}}">
+      <input @input="handleChange" :value="content" placeholder="Create a Message">
     </form>
   </div>
 </template>
@@ -11,7 +11,7 @@
 export default {
   name: "PostForm",
   props: {
-    channelName: String,
+    name: String,
     content: String
   },
   methods: {

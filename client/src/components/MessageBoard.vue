@@ -1,10 +1,16 @@
 <template>
   <div>
     <div>
-      <PostCard />
+      <PostCard v-for="post in posts" 
+      :key="post._id" 
+      :postId="post._id" 
+      :content="post.content" />
     </div>
     <div>
-      <PostForm />
+      <PostForm :name="channelName" 
+      :content="NewPostContent" 
+      @handleFormChange="handleFormChange" 
+      @handleFormSubmit="handleFormSubmit"/>
     </div>
   </div>
 </template>
@@ -42,6 +48,7 @@ export default {
         content: this.NewPostContent
       })
       this.NewPostContent = ''
+      console.log(res)
       //needs more
     },
     async handlePostEdit(postId, content) {
@@ -51,6 +58,7 @@ export default {
         postId: postId,
         content: content
       })
+      console.log(res)
       //needs more
     },
     async handlePostDelete(postId) {
@@ -59,6 +67,7 @@ export default {
         channelId: this.channelId,
         postId: postId
       })
+      console.log(res)
       //rework back end to send back the post that was deleted
     }
   }

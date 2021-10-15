@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MessageBoard />
+    <MessgeBoard :serverId="serverId" :channelName="channel.name" :channelId="channel._id" :posts="channel.posts" />
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
   },
   props: {
     serverId: String,
-    channelId: Object
+    channel: Object
   },
   data: () => {
 

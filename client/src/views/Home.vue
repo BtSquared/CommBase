@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Server />
+    <Server v-for="server in servers" :key="server._id" :server="server" :channels="server.channels" />
   </div>
 </template>
 
@@ -15,12 +15,14 @@ export default {
     Server
   },
   data: () => ({
-    Server: {}
+    servers: []
   }),
   mounted: async function() {
     const res = await axios.get(`${BASE_URL}/server/findserver`, {
-	serverId: "6165ff74a3ed534b0db53274"
-})
+      serverId: "6165ff74a3ed534b0db53274"
+    })
+    this.servers = res.data
+    console.log(res)
   },
   methods: {
 

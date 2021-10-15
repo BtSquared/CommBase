@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Server from '../pages/Server.vue'
 import Channel from '../components/Channel.vue'
+import AuthProfile from '../components/AuthProfile.vue'
+import authGuard from '../auth/authGuard'
 
 Vue.use(VueRouter)
 
@@ -11,6 +13,12 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: AuthProfile,
+    beforeEnter: authGuard
   },
   {
     path: '/:serverId',

@@ -14,7 +14,8 @@ const createUser = async (req, res) => {
 }
 
 const removeUser = async (req, res) => {
-  await User.findOneAndDelete({ _id: req.body.userId })
+  console.log(req)
+  const user = await User.findByIdAndDelete(req.body.userId)
   res.send(`user with the ID of ${req.body.userId} deleted`)
 }
 
@@ -36,7 +37,7 @@ const uploadAvatar = async (req, res) => {
     }
     let fileUrl = await uploader.upload(fileParams)
     console.log(fileUrl)
-    const user = await User.findById(req.body.userId)
+    const user = await User.find(req.body.userId)
     user.profilePicture = `https://d34y6rgwiibafg.cloudfront.net/${fileName}`
     user.save()
     res.send(user)

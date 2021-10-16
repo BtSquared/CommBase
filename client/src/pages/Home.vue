@@ -1,7 +1,6 @@
 <template>
   <div class="home">
-      <ServerList v-if="disabled" :servers="servers" />
-    <div v-if="disabled">
+    <div>
       <form @submit.prevent="handleSubmit">
         <input 
           @input="handleChange" 
@@ -12,26 +11,18 @@
         <button type="Submit">Submit</button>
       </form>
     </div>
-    <Login />
-    <Register />
   </div>
 </template>
 
 <script>
 import Client from '../services/api'
-import ServerList from '../components/ServerList.vue'
-import Register from '../pages/Register.vue'
-import Login from '../pages/Login.vue'
 
 export default {
   name: "Home",
   components: {
-    ServerList,
-    Register,
-    Login
   },
   data: () => ({
-    disabled: false,
+    disabled: true,
     servers: [],
     formData: {
       userId: '6169eb028088b19f16a9607e',

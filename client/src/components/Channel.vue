@@ -1,6 +1,11 @@
 <template>
   <div>
-    <MessgeBoard :serverId="serverId" :channelName="channel.name" :channelId="channel._id" :posts="channel.posts" />
+    <MessgeBoard 
+      :serverId="serverId" 
+      :channelName="channel.name" 
+      :channelId="channel._id" 
+      :posts="channel.posts" 
+    />
   </div>
 </template>
 

@@ -31,7 +31,12 @@ export default {
           serverId: this.user.servers[0]
         }
       })
-      // this.servers.push(res.data)
+      this.$router.push({
+          name: 'server',
+          params: {
+            serverId: this.user.servers[0]
+          }
+        })
       console.log(res)
     } else {
       this.$router.push({

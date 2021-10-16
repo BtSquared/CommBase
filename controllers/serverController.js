@@ -1,4 +1,5 @@
 const { Server, User } = require('../models')
+const middleware = require('../middleware/auth')
 
 const getAllServers = async (req, res) => {
   const servers = await Server.find({})
@@ -13,6 +14,7 @@ const getServerById = async (req, res) => {
 const createServer = async (req, res) => {
   const server = await new Server({
     owner: req.body.userId,
+    serverName: req.body.serverName,
     channels: [{ name: 'general' }]
   })
   server.save()
@@ -20,13 +22,26 @@ const createServer = async (req, res) => {
 }
 
 const joinServer = async (req, res) => {
-  const server = await Server.find({ inviteCode: req.params.inviteCode })
+  console.log(req)
+  const server = await Server.findOne(req.params)
   const user = await User.findById(req.body.userId)
+  console.log(server)
   server.whiteList.push(user._id)
   user.servers.push(server._id)
   server.save()
   user.save()
-  res.send(`${user.displayName} has joined ${server.serverName}`)
+  let payload = {
+    id: user.id,
+    displayName: user.displayName,
+    email: user.email,
+    servers: user.servers,
+    roles: user.roles,
+    bio: user.bio,
+    profilePicture: user.profilePicture,
+    banner: user.banner
+  }
+  let token = middleware.createToken(payload)
+  res.send({ user: payload, token })
 }
 
 const updateServer = async (req, res) => {}

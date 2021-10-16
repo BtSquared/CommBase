@@ -3,23 +3,20 @@ const middleware = require('../middleware/auth')
 
 const Login = async (req, res) => {
   try {
-    const user = await User.find({ email: req.body.email })
+    const user = await User.findOne({ email: req.body.email })
     if (
       user &&
-      (await middleware.comparePassword(
-        user[0].passwordDigest,
-        req.body.password
-      ))
+      (await middleware.comparePassword(user.passwordDigest, req.body.password))
     ) {
       let payload = {
-        id: user[0].id,
-        displayName: user[0].displayName,
-        email: user[0].email,
-        servers: user[0].servers,
-        roles: user[0].roles,
-        bio: user[0].bio,
-        profilePicture: user[0].profilePicture,
-        banner: user[0].banner
+        id: user.id,
+        displayName: user.displayName,
+        email: user.email,
+        servers: user.servers,
+        roles: user.roles,
+        bio: user.bio,
+        profilePicture: user.profilePicture,
+        banner: user.banner
       }
       let token = middleware.createToken(payload)
       return res.send({ user: payload, token })

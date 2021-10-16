@@ -1,5 +1,10 @@
 const { Server, User } = require('../models')
 
+const getAllServers = async (req, res) => {
+  const servers = await Server.find({})
+  res.send(servers)
+}
+
 const getServerById = async (req, res) => {
   const server = await Server.findById(req.query.serverId)
   res.send(server)
@@ -32,6 +37,7 @@ const deleteServer = async (req, res) => {
 }
 
 module.exports = {
+  getAllServers,
   getServerById,
   createServer,
   joinServer,

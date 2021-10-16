@@ -6,7 +6,6 @@
 
 <script>
 import Client from '../services/api'
-const auth = require('../services/auth')
 
 export default {
   name: "Home",
@@ -23,7 +22,8 @@ export default {
   mounted: async function() {
     const token = localStorage.getItem('token')
     if (token) {
-
+      const res = 
+      console.log(res)
     }
     if(this.user) {
       const res = await Client.get(`/server/findserver`, {

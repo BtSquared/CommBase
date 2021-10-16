@@ -15,8 +15,8 @@ const createServer = async (req, res) => {
 }
 
 const joinServer = async (req, res) => {
-  const server = Server.find({ inviteCode: req.params.inviteCode })
-  const user = User.findById(req.body.userId)
+  const server = await Server.find({ inviteCode: req.params.inviteCode })
+  const user = await User.findById(req.body.userId)
   server.whiteList.push(user._id)
   user.servers.push(server._id)
   server.save()
@@ -26,8 +26,14 @@ const joinServer = async (req, res) => {
 
 const updateServer = async (req, res) => {}
 
+const deleteServer = async (req, res) => {
+  await Server.findByIdAndDelete(req.body.serverId)
+  res.send(`server with the ID of ${req.body.serverId} deleted`)
+}
+
 module.exports = {
   getServerById,
   createServer,
-  joinServer
+  joinServer,
+  deleteServer
 }

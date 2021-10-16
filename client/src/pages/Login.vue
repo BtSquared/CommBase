@@ -1,12 +1,27 @@
 <template>
   <div>
-    <form @submit.prevent="handleSubmit">
-    <input @input="handleChange" type="text" :value="displayName" name="displayName" placeholder="Display Name" required/>
-    <input @input="handleChange" type="email" :value="email" name="email" placeholder="Email" required/>
-    <input @input="handleChange" type="password" :value="password" name="password" placeholder="Password" required/>
-    <input @input="handleChange" type="password" :value="confrimPassword" name="confrimPassword" placeholder="Confrim Password" required/>
-    <button type="submit" :disabled="password != confrimPassword">Submit</button>
-    </form>
+    <div class="regBox">
+      <h1>Login</h1>
+      <form @submit.prevent="handleSubmit">
+        <input 
+          @input="handleChange" 
+          type="email" 
+          :value="formData.email" 
+          name="email" 
+          placeholder="Email" 
+          required
+        />
+        <input 
+          @input="handleChange" 
+          type="password" 
+          :value="formData.password" 
+          name="password" 
+          placeholder="Password" 
+          required
+        />
+        <button type="Submit">Submit</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -17,18 +32,39 @@ export default {
   name: "Login",
   data: () => ({
     formData: {
-      displayName: '',
       email: '',
-      password: '',
-      confrimPassword: ''
+      password: ''
     }
   }),
+  computed: {
+    user () {
+      return this.$store.state.user
+    }
+  },
   methods: {
     handleChange(e) {
       this.formData[e.target.name] = e.target.value
     },
-    handleSubmit() {
+    async handleSubmit() {
+      const res = await Client.post('/auth/login', {...this.formData})
+      const user = res.data.user
+      this.$store.commit('setUser', user)
+      localStorage.setItem('token', res.data.token)
+      this.$router.push({
+        name: 'server',
+        params: {
+
+        }
+      })
     }
   }
 }
 </script>
+
+<style scoped>
+.regBox {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+}
+</style>

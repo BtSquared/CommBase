@@ -12,17 +12,23 @@
         <button type="Submit">Submit</button>
       </form>
     </div>
+    <Login />
+    <Register />
   </div>
 </template>
 
 <script>
 import Client from '../services/api'
 import ServerList from '../components/ServerList.vue'
+import Register from '../pages/Register.vue'
+import Login from '../pages/Login.vue'
 
 export default {
   name: "Home",
   components: {
-    ServerList
+    ServerList,
+    Register,
+    Login
   },
   data: () => ({
     disabled: false,

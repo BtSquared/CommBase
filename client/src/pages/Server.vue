@@ -37,6 +37,11 @@ export default {
     channels: [],
     selectedChannel: {}
   }),
+  computed: {
+    user () {
+      return this.$store.state.user
+    }
+  },
   mounted: async function() {
     console.log(this.$route.params.serverId)
     const res = await Client.get(`/server/findserver`, {

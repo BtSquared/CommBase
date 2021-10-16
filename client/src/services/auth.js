@@ -21,7 +21,7 @@ const RegisterUser = async data => {
 
 const CheckSession = async () => {
   try {
-    const res = await Client.get('/auth/session')
+    const res = await Client.get('/auth/checksession')
     return res.data
   } catch (error) {
     throw error

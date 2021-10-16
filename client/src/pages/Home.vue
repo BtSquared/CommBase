@@ -1,16 +1,6 @@
 <template>
   <div class="home">
-    <div>
-      <form @submit.prevent="handleSubmit">
-        <input 
-          @input="handleChange" 
-          type="file"
-          name="avatar"
-          placeholder="avatar"
-        />
-        <button type="Submit">Submit</button>
-      </form>
-    </div>
+
   </div>
 </template>
 
@@ -22,35 +12,26 @@ export default {
   components: {
   },
   data: () => ({
-    disabled: true,
-    servers: [],
-    formData: {
-      userId: '6169eb028088b19f16a9607e',
-      avatar: ''
-    }
+    
   }),
-  mounted: async function() {
-    const res = await Client.get(`/server/findserver`, {
-      params: {
-        serverId: "6165ff74a3ed534b0db53274"
-      }
-    })
-    this.servers.push(res.data)
-    console.log(res)
+  computed: {
+    user () {
+      return this.$store.state.user
+    }
   },
-  methods: {
-    handleChange(e){
-      this.formData.avatar = e.target.files[0]
-      console.log(this.formData)
-    },
-    async handleSubmit() {
-      let formData = new FormData()
-      for (const key in this.formData) {
-        formData.append(key, this.formData[key])
-      }
-      const res = await Client.post(`/user/avatar`, formData)
+  mounted: async function() {
+    if(this.user) {
+      const res = await Client.get(`/server/findserver`, {
+        params: {
+          serverId: this.user.servers[0]
+        }
+      })
+      this.servers.push(res.data)
       console.log(res)
-    },
-  }
+    }
+    this.$router.push({
+        name: 'Login'
+      })
+  },
 }
 </script>

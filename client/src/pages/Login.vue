@@ -51,10 +51,7 @@ export default {
       this.$store.commit('setUser', user)
       localStorage.setItem('token', res.data.token)
       this.$router.push({
-        name: 'server',
-        params: {
-
-        }
+        name: 'Home'
       })
     }
   }

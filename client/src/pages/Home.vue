@@ -22,8 +22,8 @@ export default {
   mounted: async function() {
     const token = localStorage.getItem('token')
     if (token) {
-      const res = 
-      console.log(res)
+      const res = await Client.get('/auth/checksession')
+      this.$store.commit('setUser', res.data)
     }
     if(this.user) {
       const res = await Client.get(`/server/findserver`, {
@@ -31,12 +31,13 @@ export default {
           serverId: this.user.servers[0]
         }
       })
-      this.servers.push(res.data)
+      // this.servers.push(res.data)
       console.log(res)
+    } else {
+      this.$router.push({
+          name: 'Login'
+        })
     }
-    this.$router.push({
-        name: 'Login'
-      })
   },
 }
 </script>

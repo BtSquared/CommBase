@@ -47,8 +47,7 @@ export default {
     },
     async handleSubmit() {
       const res = await Client.post('/auth/login', {...this.formData})
-      const user = res.data.user
-      this.$store.commit('setUser', user)
+      this.$store.commit('setUser', res.data.user)
       localStorage.setItem('token', res.data.token)
       this.$router.push({
         name: 'Home'

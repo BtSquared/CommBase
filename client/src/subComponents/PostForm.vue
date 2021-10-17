@@ -1,12 +1,14 @@
 <template>
   <div>
-    <form @submit.prevent="handleSubmit">
-      <input 
-        @input="handleChange" 
-        :value="content" 
-        placeholder="Create a Message"
-      />
-    </form>
+    <div id="container">
+      <form @submit.prevent="handleSubmit">
+        <input 
+          @input="handleChange" 
+          :value="content" 
+          placeholder="Create a Message"
+        />
+      </form>
+    </div>
   </div>
 </template>
 
@@ -28,3 +30,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+#container {
+  margin: 0;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 340px;
+  padding: 10px 0 10px 0;
+  height: 50px;
+}
+</style>

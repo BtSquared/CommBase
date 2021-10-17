@@ -1,9 +1,11 @@
 <template>
   <div>
-    <div id="container">
-      <div v-for="channel in channels" :key="channel._id">
-        <div @click="handleClick(channel)" class="channels">
-          # {{channel.name}}
+    <div id="margin">
+      <div id="container">
+        <div v-for="channel in channels" :key="channel._id">
+          <div @click="handleClick(channel)" class="channels">
+            # {{channel.name}}
+          </div>
         </div>
       </div>
     </div>
@@ -37,16 +39,19 @@ export default {
 </script>
 
 <style scoped>
+#margin{
+  margin: 0;
+}
 #container {
   display: flex;
   flex-direction: column;
   background-color: rgb(86, 86, 86);
-  padding: 5px;
   position: absolute;
+  padding: 0 5px 0 5px;
   left: 90px;
   top: 0px;
-  width: 240px;
   height: 100%;
+  width: 240px;
   color: white;
 }
 .channels {

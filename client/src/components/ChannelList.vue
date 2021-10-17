@@ -2,7 +2,7 @@
   <div>
     <div id="container">
       <div v-for="channel in channels" :key="channel._id">
-        <div @click="handleClick(channel)">
+        <div @click="handleClick(channel)" class="channels">
           {{channel.name}}
         </div>
       </div>
@@ -20,6 +20,9 @@ export default {
   },
   methods: {
     handleClick(channel) {
+      if(this.$route.params.channelId === channel._id) {
+        return
+      }
       this.$emit('changeChannel', channel)
       this.$router.push({ 
         name: 'channel', 
@@ -45,5 +48,11 @@ export default {
   width: 240px;
   height: 100%;
   color: white;
+}
+.channels {
+  background-color: rgb(191, 191, 191);
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
 }
 </style>

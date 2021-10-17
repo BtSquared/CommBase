@@ -26,7 +26,11 @@ const createServer = async (req, res) => {
     inviteCode: makeCode(),
     channels: [{ name: 'general' }]
   })
+  server.whiteList.push(req.body.userId)
   server.save()
+  const user = await User.findById(req.body.userId)
+  user.servers.push(server._id)
+  user.save()
   res.send(server)
 }
 

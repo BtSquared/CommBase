@@ -6,7 +6,7 @@ const Server = new Schema(
   {
     owner: { type: Schema.Types.ObjectId, ref: 'users', required: true },
     serverName: { type: String, required: true },
-    inviteCode: { type: String, required: true },
+    inviteCode: { type: String, unique: true, required: true },
     whiteList: { type: Array, default: [] },
     blackList: { type: Array, default: [] },
     channels: [Channel],

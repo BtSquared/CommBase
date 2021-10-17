@@ -15,6 +15,7 @@
         :channelId="selectedChannel._id" 
         :posts="selectedChannel.posts" 
       />
+      <CreateServer />
     </div>
   </div>
 </template>
@@ -24,13 +25,15 @@ import Client from '../services/api'
 import ChannelList from '../components/ChannelList.vue'
 import MessageBoard from '../components/MessageBoard.vue'
 import ServerList from '../components/ServerList.vue'
+import CreateServer from '../components/CreateServer.vue'
 
 export default {
   name: "Server",
   components: {
     ChannelList,
     MessageBoard,
-    ServerList
+    ServerList,
+    CreateServer
   },
   data: () => ({
     server: null,

@@ -59,7 +59,7 @@ export default {
     this.fetchServer()
   },
   watch: {
-    '$route': 'fetchServer'
+    '$route.params.serverId': 'fetchServer'
   },
   methods: {
     changeChannel(channel) {

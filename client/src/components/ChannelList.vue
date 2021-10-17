@@ -3,7 +3,7 @@
     <div id="container">
       <div v-for="channel in channels" :key="channel._id">
         <div @click="handleClick(channel)" class="channels">
-          {{channel.name}}
+          # {{channel.name}}
         </div>
       </div>
     </div>
@@ -50,9 +50,11 @@ export default {
   color: white;
 }
 .channels {
-  background-color: rgb(191, 191, 191);
-  padding: 5px;
-  margin: 5px;
+  padding: 3px;
+  margin: 3px;
   border-radius: 5px;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 700;
 }
 </style>

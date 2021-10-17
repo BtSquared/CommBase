@@ -12,9 +12,18 @@ const getServerById = async (req, res) => {
 }
 
 const createServer = async (req, res) => {
+  const makeCode = () => {
+    let code = ''
+    const characters = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`
+    for (let i = 0; i < 10; i++) {
+      code += characters.charAt(Math.floor(Math.random() * characters.length))
+    }
+    return code
+  }
   const server = await new Server({
     owner: req.body.userId,
     serverName: req.body.serverName,
+    inviteCode: makeCode(),
     channels: [{ name: 'general' }]
   })
   server.save()
@@ -22,10 +31,8 @@ const createServer = async (req, res) => {
 }
 
 const joinServer = async (req, res) => {
-  console.log(req)
   const server = await Server.findOne(req.params)
   const user = await User.findById(req.body.userId)
-  console.log(server)
   server.whiteList.push(user._id)
   user.servers.push(server._id)
   server.save()
@@ -48,6 +55,16 @@ const updateServer = async (req, res) => {}
 
 const deleteServer = async (req, res) => {
   await Server.findByIdAndDelete(req.body.serverId)
+  const users = await User.find({ $in: req.body.serverId })
+  for (let i = 0; i < users.length; i++) {
+    let user = await User.findById(users[i]._id)
+    let index = user.servers.indexOf(req.body.serverId)
+    if (index === -1) {
+    } else {
+      user.servers.splice(index, 1)
+      user.save()
+    }
+  }
   res.send(`server with the ID of ${req.body.serverId} deleted`)
 }
 

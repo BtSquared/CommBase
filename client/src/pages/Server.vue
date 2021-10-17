@@ -43,21 +43,38 @@ export default {
     }
   },
   mounted: async function() {
-    console.log(this.$route.params.serverId)
-    const res = await Client.get(`/server/findserver`, {
-      params: {
-        serverId: this.$route.params.serverId
+    if(!this.user) {
+        const token = localStorage.getItem('token')
+      if (token) {
+        const res = await Client.get('/auth/checksession')
+        if (res.data.new) {
+          localStorage.removeItem('token')
+          localStorage.setItem('token', res.data.user.token)
+          this.$store.commit('setUser', res.data.user.payload)
+        } else {
+          this.$store.commit('setUser', res.data.user)
+        }
       }
-    })
-    this.server = res.data
-    this.channels = res.data.channels
-    this.selectedChannel = res.data.channels[0]
+    }
+    this.fetchServer()
+  },
+  watch: {
+    '$route': 'fetchServer'
   },
   methods: {
     changeChannel(channel) {
       this.selectedChannel = channel
+    },
+    async fetchServer() {
+      const res = await Client.get(`/server/findserver`, {
+      params: {
+        serverId: this.$route.params.serverId
+      }
+    })
+      this.server = res.data
+      this.channels = res.data.channels
+      this.selectedChannel = res.data.channels[0]
     }
-  },
-
+  }
 }
 </script>

@@ -9,7 +9,7 @@ const Login = async (req, res) => {
       (await middleware.comparePassword(user.passwordDigest, req.body.password))
     ) {
       let payload = {
-        id: user.id,
+        _id: user.id,
         displayName: user.displayName,
         email: user.email,
         servers: user.servers,
@@ -61,8 +61,35 @@ const UpdatePassword = async (req, res) => {
 }
 
 const CheckSession = async (req, res) => {
-  const { payload } = res.locals
-  res.send(payload)
+  const user = await User.findById(res.locals.payload._id)
+  const arrayCompare = (arr1, arr2) => {
+    if (arr1.length !== arr2.length) {
+      return false
+    }
+    for (let i = 0; i < arr1.length; i++) {
+      if (arr1[i].toString() !== arr2[i]) {
+        return false
+      }
+    }
+    return true
+  }
+  if (arrayCompare(user.servers, res.locals.payload.servers)) {
+    const { payload } = res.locals
+    res.send({ user: payload, new: false })
+  } else {
+    let payload = {
+      _id: user.id,
+      displayName: user.displayName,
+      email: user.email,
+      servers: user.servers,
+      roles: user.roles,
+      bio: user.bio,
+      profilePicture: user.profilePicture,
+      banner: user.banner
+    }
+    let token = middleware.createToken(payload)
+    return res.send({ user: { payload, token }, new: true })
+  }
 }
 
 module.exports = {

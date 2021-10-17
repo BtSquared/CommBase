@@ -1,7 +1,14 @@
 <template>
   <div>
-    <div v-for="server in servers" :key="server._id">
-      <router-link :to="{name: 'server', params: { serverId: server._id}}">Server Link</router-link>
+    <div v-for="server in user.servers" :key="server">
+      <router-link 
+      :to="{
+        name: 'server', 
+        params: { 
+          serverId: server
+          }
+        }"
+      >Server Link</router-link>
     </div>
   </div>
 </template>
@@ -10,8 +17,10 @@
 
 export default {
   name: 'ServerList',
-  props: {
-    servers: Array
+  computed: {
+    user () {
+      return this.$store.state.user
+    }
   }
 }
 </script>

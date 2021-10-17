@@ -23,7 +23,13 @@ export default {
     const token = localStorage.getItem('token')
     if (token) {
       const res = await Client.get('/auth/checksession')
-      this.$store.commit('setUser', res.data)
+      if (res.data.new) {
+        localStorage.removeItem('token')
+        localStorage.setItem('token', res.data.user.token)
+        this.$store.commit('setUser', res.data.user.payload)
+      } else {
+        this.$store.commit('setUser', res.data.user)
+      }
     }
     if(this.user) {
       const res = await Client.get(`/server/findserver`, {

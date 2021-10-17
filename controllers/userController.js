@@ -2,13 +2,17 @@ const { User } = require('../models')
 const path = require('path')
 const uploader = require('../middleware/uploader')
 
+const getAllUsers = async (req, res) => {
+  const users = await User.find({})
+  res.send(users)
+}
+
 const getUserById = async (req, res) => {
-  const user = await User.find({ _id: req.body.userId })
+  const user = await User.findById(req.body.userId)
   res.send(user)
 }
 
 const removeUser = async (req, res) => {
-  console.log(req)
   const user = await User.findByIdAndDelete(req.body.userId)
   res.send(`user with the ID of ${req.body.userId} deleted`)
 }
@@ -41,6 +45,7 @@ const uploadAvatar = async (req, res) => {
 }
 
 module.exports = {
+  getAllUsers,
   getUserById,
   removeUser,
   uploadAvatar

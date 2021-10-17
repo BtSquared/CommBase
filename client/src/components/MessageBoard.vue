@@ -1,22 +1,24 @@
 <template>
   <div>
-    <div>
-      <PostCard 
-        v-for="post in posts" 
-        :key="post._id" 
-        :postId="post._id" 
-        :content="post.content"
-        @handlePostEdit="handlePostEdit"
-        @handlePostDelete="handlePostDelete"
-      />
-    </div>
-    <div>
-      <PostForm 
-        :name="channelName" 
-        :content="NewPostContent" 
-        @handleFormChange="handleFormChange" 
-        @handleFormSubmit="handleFormSubmit"
-      />
+    <div class="MBCon">
+      <div id="postsCon">
+          <PostCard class="post"
+            v-for="post in posts" 
+            :key="post._id" 
+            :postId="post._id" 
+            :content="post.content"
+            @handlePostEdit="handlePostEdit"
+            @handlePostDelete="handlePostDelete"
+          />
+      </div>
+      <div id="form">
+        <PostForm 
+          :name="channelName" 
+          :content="NewPostContent" 
+          @handleFormChange="handleFormChange" 
+          @handleFormSubmit="handleFormSubmit"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -78,3 +80,24 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.MBCon {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.post{
+  
+}
+#postsCon {
+  background-color: rgb(114, 114, 114);
+  color: white;
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+</style>

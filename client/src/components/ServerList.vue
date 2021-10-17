@@ -1,19 +1,21 @@
 <template>
   <div>
-    <div id="container">
-      <div v-for="server in servers" :key="server._id" class="icons">
-        <router-link 
-        :to="{
-          name: 'server',
-          params: {
-            serverId: server._id
-            }
-          }"
-        >
-          <div>
-            <img id="img" :src="server.serverIcon" />
-          </div>
-        </router-link>
+    <div class="SLGridCon">
+      <div class="SLcontainer">
+        <div v-for="server in servers" :key="server._id" class="SLicons">
+          <router-link 
+          :to="{
+            name: 'server',
+            params: {
+              serverId: server._id
+              }
+            }"
+          >
+            <div>
+              <img class="SLimg" :src="server.serverIcon" />
+            </div>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -61,32 +63,32 @@ export default {
 }
 </script>
 
-<style scoped>
-#container {
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(57, 57, 57);
-  position: absolute;
-  padding: 0 5px 0 5px;
-  left: 0px;
-  top: 0px;
-  width: 80px;
+<style>
+.SLGridCon{
+  display: grid;
+  grid-row: 1 / 2;
+  grid-column: 1/ 2;
   height: 100%;
 }
-#img {
-  width: 50px;
-  height: 50px
+.SLcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: rgb(57, 57, 57);
 }
-.icons {
+.SLicons {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
-  background-color: rgb(165, 165, 165);
-  padding: 5px;
-  margin: 5px;
-  width: 60px;
-  height: 60px;
+  align-self: center;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
   border-radius: 25px;
+}
+.SLimg {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
 }
 </style>

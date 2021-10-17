@@ -1,22 +1,20 @@
 <template>
-  <div v-if="deleted === false">
-    <div>
-      <div v-if="editMode">
-        <input @input="handleChange" :value="content">
-      </div>
-      <div v-else>
-        <div>
-          <!-- <img /> -->
-          <!-- <h2>{{userName}}</h2> -->
-        </div>
+  <div v-if="deleted === false" class="postCard">
+      <input v-if="editMode" class="edit" @input="handleChange" :value="content">
+      <div v-else class="postcontent">
+        <!-- <img /> -->
+        <!-- <h2>{{userName}}</h2> -->
         <p>{{content}}</p>
       </div>
-    </div>
-    <div>
-      <button v-if="editMode === true" @click="handleEdit">Save Changes</button>
-      <button v-else @click="toggleEdit">Edit</button>
-      <button v-if="deleteCheckToggle" @click="handleDelete">Are You Sure You Want To DELETE This Message</button>
-      <button v-else @click="deleteCheck">Delete</button>
+    <div class="buttonDiv">
+      <div>
+        <button v-if="editMode === true" @click="handleEdit">Save Changes</button>
+        <button v-else @click="toggleEdit">Edit</button>
+      </div>
+      <div>
+        <button v-if="deleteCheckToggle" @click="handleDelete">Are You Sure?</button>
+        <button v-else @click="deleteCheck">Delete</button>
+      </div>
     </div>
   </div>
 </template>
@@ -56,3 +54,37 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+button {
+  border: none;
+  background-color: rgb(35, 35, 35);
+  color: white;
+}
+.postCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(35, 35, 35);
+  margin: 5px 8px 5px 8px;
+  border-radius: 5px;
+}
+.buttonDiv {
+  margin: 5px 15px 5px 15px;
+  display: flex;
+}
+.postcontent {
+  margin: 0 0 0 20px;
+  font-size: 18px;
+}
+.edit {
+  border: none;
+  background-color: rgb(35, 35, 35);
+  color: white;
+  margin: 5px 15px 5 20px;
+  font-size: 18px;
+  padding: 15px 0 15px 0;
+  font-weight: 500;
+  width: 75%;
+}
+</style>

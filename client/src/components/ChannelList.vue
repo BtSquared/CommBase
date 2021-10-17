@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="margin">
+    <div class="CLGridCon">
       <div id="container">
         <div v-for="channel in channels" :key="channel._id">
           <div @click="handleClick(channel)" class="channels">
@@ -39,18 +39,17 @@ export default {
 </script>
 
 <style scoped>
-#margin{
+.CLGridCon{
   margin: 0;
+  display: grid;
+  grid-row: 1 / 3;
+  grid-column: 2/ 3;
+  height: 100%;
 }
 #container {
   display: flex;
   flex-direction: column;
   background-color: rgb(86, 86, 86);
-  position: absolute;
-  padding: 0 5px 0 5px;
-  left: 90px;
-  top: 0px;
-  height: 100%;
   width: 240px;
   color: white;
 }

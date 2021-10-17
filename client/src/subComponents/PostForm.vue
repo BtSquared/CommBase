@@ -1,13 +1,15 @@
 <template>
   <div>
-    <div id="container">
-      <form @submit.prevent="handleSubmit">
-        <input 
-          @input="handleChange" 
-          :value="content" 
-          placeholder="Create a Message"
-        />
-      </form>
+    <div class="PFGridCon">
+      <div id="PFcontainer">
+        <form @submit.prevent="handleSubmit">
+          <input 
+            @input="handleChange" 
+            :value="content" 
+            placeholder="Create a Message"
+          />
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -32,13 +34,27 @@ export default {
 </script>
 
 <style scoped>
-#container {
+::placeholder{
+  color: rgb(206, 206, 206);
+  font-size: 16px;
+  padding: 20px;
+}
+input {
+  width: 95%;
+  height: 30px;
+  background-color: rgb(144, 144, 144);
+  border: none;
+  border-radius: 7px;
+  font-size: 16px;
+}
+#PFcontainer {
+  text-align: center;
   margin: 0;
   display: flex;
-  position: absolute;
-  bottom: 0;
-  left: 340px;
-  padding: 10px 0 10px 0;
-  height: 50px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px 0 5px 0;
+  background-color: rgb(114, 114, 114);
+  height: 60px;
 }
 </style>

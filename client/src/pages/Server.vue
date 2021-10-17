@@ -1,24 +1,18 @@
 <template>
   <div>
-    <div>
+    <div id="gridCon">
       <ServerList />
-    </div>
-    <div>
-    <ChannelList v-if="channels"
-      @changeChannel="changeChannel" 
-      :serverId="server._id" 
-      :channels="server.channels"
-    />
-    </div>
-    <div>
+      <ChannelList v-if="channels"
+        @changeChannel="changeChannel" 
+        :serverId="server._id" 
+        :channels="server.channels"
+      />
       <MessageBoard v-if="selectedChannel"
         :serverId="server._id" 
         :channelName="selectedChannel.name" 
         :channelId="selectedChannel._id" 
         :posts="selectedChannel.posts" 
       />
-    </div>
-    <div>
       <UserList :users="server.whiteList" />
     </div>
   </div>
@@ -85,3 +79,19 @@ export default {
   }
 }
 </script>
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
+#gridCon {
+  display: grid;
+  grid-template-columns: 70px 240px 1fr 220px;
+  grid-template-rows: 1fr 60px;
+  width: 100vw;
+  height: 100vh;
+}
+</style>

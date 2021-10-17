@@ -19,9 +19,6 @@ export default {
   components: {
     UserListCard
   },
-  props: {
-    users: Array
-  },
   data: () => ({
     userList: null
   }),
@@ -33,8 +30,12 @@ export default {
   },
   methods: {
     async getList() {
-      const res = await Client.post('/server/getserverusers', { userList: this.users })
-      console.log(res.data)
+      const server = await Client.get(`/server/findserver`, {
+        params: {
+          serverId: this.$route.params.serverId
+        }
+      })
+      const res = await Client.post('/server/getserverusers', { userList: server.data.whiteList })
       this.userList = res.data
     }
   }

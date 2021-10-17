@@ -31,7 +31,7 @@ export default {
       }
     }
     if(this.user) {
-      const res = await Client.get(`/server/findserver`, {
+      await Client.get(`/server/findserver`, {
         params: {
           serverId: this.user.servers[0]
         }
@@ -42,7 +42,6 @@ export default {
             serverId: this.user.servers[0]
           }
         })
-      console.log(res)
     } else {
       this.$router.push({
           name: 'Login'

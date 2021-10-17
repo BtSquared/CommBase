@@ -42,6 +42,19 @@ export default {
   },
   methods: {
     async fetchServerInfo() {
+      if(!this.user) {
+        const token = localStorage.getItem('token')
+      if (token) {
+        const res = await Client.get('/auth/checksession')
+        if (res.data.new) {
+          localStorage.removeItem('token')
+          localStorage.setItem('token', res.data.user.token)
+          this.$store.commit('setUser', res.data.user.payload)
+        } else {
+          this.$store.commit('setUser', res.data.user)
+        }
+      }
+    }
         this.servers = []
         let collection = []
         let servers = this.user.servers

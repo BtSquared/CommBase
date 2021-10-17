@@ -41,9 +41,13 @@ export default {
     posts: Array
   },
   data: () => ({
-    NewPostContent: '',
-    userId: "6165fd458d1cc7304de7f6d2" // this needs to be set up
+    NewPostContent: ''
   }),
+  computed: {
+    user () {
+      return this.$store.state.user
+    }
+  },
   methods: {
     handleFormChange(value) {
       this.NewPostContent = value
@@ -52,30 +56,26 @@ export default {
       const res = await Client.post(`/post/createpost`, {
         serverId: this.serverId,
         channelId:  this.channelId,
-        userId: this.userId,
+        userId: this.user._id,
         content: this.NewPostContent
       })
       this.NewPostContent = ''
       this.posts.push(res.data.posts[res.data.posts.length - 1])
     },
     async handlePostEdit(postId, content) {
-      const res = await Client.put(`/post/edit`, {
+      await Client.put(`/post/edit`, {
         serverId: this.serverId,
         channelId: this.channelId,
         postId: postId,
         content: content
       })
-      console.log(res)
-      //needs more
     },
     async handlePostDelete(postId) {
-      const res = await Client.delete(`/post/remove`, { data: {
+      await Client.delete(`/post/remove`, { data: {
         serverId: this.serverId,
         channelId: this.channelId,
         postId: postId
       }})
-      console.log(res)
-      //rework back end to send back the post that was deleted
     }
   }
 }
@@ -89,7 +89,7 @@ export default {
   justify-content: flex-end;
 }
 .post{
-  
+
 }
 #postsCon {
   background-color: rgb(114, 114, 114);

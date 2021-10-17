@@ -1,6 +1,8 @@
 const { Server, User } = require('../models')
 const middleware = require('../middleware/auth')
 const { ObjectId } = require('bson')
+const path = require('path')
+const uploader = require('../middleware/uploader')
 
 const getAllServers = async (req, res) => {
   const servers = await Server.find({})
@@ -13,7 +15,6 @@ const getServerById = async (req, res) => {
 }
 
 const getServerUsers = async (req, res) => {
-  console.log(req.body)
   let usersList = req.body.userList.map((user) => {
     return ObjectId(user)
   })
@@ -74,7 +75,30 @@ const joinServer = async (req, res) => {
   res.send({ user: payload, token })
 }
 
-const updateServer = async (req, res) => {}
+const updateServerIcon = async (req, res) => {
+  try {
+    let file = req.file
+    const fileName = `${req.body.serverId}/serverIcon${path.extname(
+      file.originalname
+    )}`
+    let fileParams = {
+      Key: fileName,
+      Body: file.buffer,
+      ACL: 'public-read',
+      Bucket: 'commbase-avatars',
+      ContentEncoding: file.encoding,
+      ContentLength: file.size,
+      ContentType: file.mimetype
+    }
+    await uploader.upload(fileParams)
+    const server = await Server.findById(req.body.serverId)
+    server.serverIcon = `https://d34y6rgwiibafg.cloudfront.net/${fileName}`
+    server.save()
+    res.send(server)
+  } catch (err) {
+    throw err
+  }
+}
 
 const deleteServer = async (req, res) => {
   await Server.findByIdAndDelete(req.body.serverId)
@@ -97,5 +121,6 @@ module.exports = {
   getServerUsers,
   createServer,
   joinServer,
+  updateServerIcon,
   deleteServer
 }

@@ -4,7 +4,8 @@
       <ServerList />
       <ChannelList v-if="channels"
         @changeChannel="changeChannel" 
-        :serverId="server._id" 
+        :serverId="server._id"
+        :serverName="server.serverName" 
         :channels="server.channels"
       />
       <MessageBoard v-if="selectedChannel"
@@ -13,7 +14,7 @@
         :channelId="selectedChannel._id" 
         :posts="selectedChannel.posts" 
       />
-      <UserList :users="server.whiteList" />
+      <UserList />
     </div>
   </div>
 </template>
@@ -57,7 +58,7 @@ export default {
         }
       }
     }
-    this.fetchServer()
+    await this.fetchServer()
   },
   watch: {
     '$route.params.serverId': 'fetchServer'
@@ -75,6 +76,16 @@ export default {
       this.server = res.data
       this.channels = res.data.channels
       this.selectedChannel = res.data.channels[0]
+      if(this.$route.params.channelId === this.channels[0]._id) {
+        return
+      }
+      this.$router.push({ 
+        name: 'channel', 
+        params: { 
+          serverId: this.server._id, 
+          channelId: this.channels[0]._id, 
+          channel: this.channels[0] 
+        }})
     }
   }
 }

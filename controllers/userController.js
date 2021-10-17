@@ -3,23 +3,34 @@ const path = require('path')
 const uploader = require('../middleware/uploader')
 
 const getAllUsers = async (req, res) => {
-  const users = await User.find({})
-  res.send(users)
+  try {
+    const users = await User.find({})
+    res.send(users)
+  } catch (err) {
+    throw err
+  }
 }
 
 const getUserById = async (req, res) => {
-  const user = await User.findById(req.body.userId)
-  res.send(user)
+  try {
+    const user = await User.findById(req.body.userId)
+    res.send(user)
+  } catch (err) {
+    throw err
+  }
 }
 
 const removeUser = async (req, res) => {
-  const user = await User.findByIdAndDelete(req.body.userId)
-  res.send(`user with the ID of ${req.body.userId} deleted`)
+  try {
+    await User.findByIdAndDelete(req.body.userId)
+    res.send(`user with the ID of ${req.body.userId} deleted`)
+  } catch (err) {
+    throw err
+  }
 }
 
 const uploadAvatar = async (req, res) => {
   try {
-    console.log(req.file, req.body)
     let file = req.file
     const fileName = `${req.body.userId}/avatar${path.extname(
       file.originalname
@@ -34,12 +45,12 @@ const uploadAvatar = async (req, res) => {
       ContentType: file.mimetype
     }
     await uploader.upload(fileParams)
-    const user = await User.find(req.body.userId)
+    const user = await User.findById(req.body.userId)
     user.profilePicture = `https://d34y6rgwiibafg.cloudfront.net/${fileName}`
     user.save()
     res.send(user)
   } catch (err) {
-    console.log(err)
+    throw err
   }
 }
 

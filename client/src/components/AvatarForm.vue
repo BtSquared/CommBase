@@ -19,10 +19,15 @@ export default {
   name: 'AvatarForm',
   data: () => ({
     formData: {
-      userId: 'default',
+      userId: this.user._id,
       avatar: ''
     }
   }),
+  computed: {
+    user () {
+      return this.$store.state.user
+    }
+  },
   methods: {
     handleChange(e){
       this.formData.avatar = e.target.files[0]

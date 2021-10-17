@@ -2,6 +2,14 @@
   <div>
     <div class="CLGridCon">
       <div id="container">
+        <div v-if="update">
+          <h2>update server Icon</h2>
+          <ServerIconForm @handleIconSubmit="handleIconSubmit"/>
+        </div>
+        <div v-else class="flex">
+          <h2>{{serverName}}</h2>
+          <button @click="toggleUpdateButton">Settings</button>
+        </div>
         <div v-for="channel in channels" :key="channel._id">
           <div @click="handleClick(channel)" class="channels">
             # {{channel.name}}
@@ -13,12 +21,24 @@
 </template>
 
 <script>
+import Client from '../services/api'
+import ServerIconForm from '../subComponents/ServerIconForm.vue'
 
 export default { 
   name: "ServerChannelList",
+  components: {
+    ServerIconForm
+  },
   props: {
     serverId: String,
+    serverName: String,
     channels: Array
+  },
+  data:() => ({
+    update: false
+  }),
+  watch: {
+    '$route.params.serverId': 'toggleUpdateRoute'
   },
   methods: {
     handleClick(channel) {
@@ -32,13 +52,41 @@ export default {
           serverId: this.serverId, 
           channelId: channel._id, 
           channel: channel 
-        }})
+        }
+      })
+    },
+    async handleIconSubmit(data) {
+      console.log(data)
+      let formData = new FormData()
+      for (const key in data) {
+        formData.append(key, data[key])
+      }
+      await Client.put(`/server/updateicon`, formData)
+      this.update = false
+    },
+    toggleUpdateButton() {
+      this.update = true
+    },
+    toggleUpdateRoute() {
+      this.update = false
     }
   }
 }
 </script>
 
 <style scoped>
+h2{
+  margin: 5px 0 5px 20px;
+}
+button {
+height: 20px;
+align-self: center;
+margin: 5px 20px 5px 0;
+}
+.flex{
+  display: flex;
+  justify-content: space-between;
+}
 .CLGridCon{
   margin: 0;
   display: grid;

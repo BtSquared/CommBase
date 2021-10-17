@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Cleint from '../services/api'
+import Client from '../services/api'
 
 export default {
   name: 'CreateServer',
@@ -35,7 +35,7 @@ export default {
       if(this.serverName === ''){
         return
       }
-      const server = await Cleint.post('/server/createserver', {
+      const server = await Client.post('/server/createserver', {
         serverName: this.serverName,
         userId: this.user._id
       })

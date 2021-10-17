@@ -1,5 +1,6 @@
 const { Server, User } = require('../models')
 const middleware = require('../middleware/auth')
+const { ObjectId } = require('bson')
 
 const getAllServers = async (req, res) => {
   const servers = await Server.find({})
@@ -9,6 +10,23 @@ const getAllServers = async (req, res) => {
 const getServerById = async (req, res) => {
   const server = await Server.findById(req.query.serverId)
   res.send(server)
+}
+
+const getServerUsers = async (req, res) => {
+  let usersList = req.body.userList.map((user) => {
+    return ObjectId(user)
+  })
+  const users = await User.find({ _id: { $in: usersList } })
+  let list = []
+  for (let i = 0; i < users.length; i++) {
+    let userInfo = {
+      _id: users[i].id,
+      displayName: users[i].displayName,
+      profilePicture: users[i].profilePicture
+    }
+    list.push(userInfo)
+  }
+  res.send(list)
 }
 
 const createServer = async (req, res) => {
@@ -75,6 +93,7 @@ const deleteServer = async (req, res) => {
 module.exports = {
   getAllServers,
   getServerById,
+  getServerUsers,
   createServer,
   joinServer,
   deleteServer

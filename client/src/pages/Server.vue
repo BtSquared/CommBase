@@ -3,11 +3,13 @@
     <div>
       <ServerList />
     </div>
+    <div>
     <ChannelList v-if="channels"
       @changeChannel="changeChannel" 
       :serverId="server._id" 
       :channels="server.channels"
     />
+    </div>
     <div>
       <MessageBoard v-if="selectedChannel"
         :serverId="server._id" 
@@ -15,6 +17,9 @@
         :channelId="selectedChannel._id" 
         :posts="selectedChannel.posts" 
       />
+    </div>
+    <div>
+      <UserList :users="server.whiteList" />
     </div>
   </div>
 </template>
@@ -24,13 +29,15 @@ import Client from '../services/api'
 import ChannelList from '../components/ChannelList.vue'
 import MessageBoard from '../components/MessageBoard.vue'
 import ServerList from '../components/ServerList.vue'
+import UserList from '../components/UserList.vue'
 
 export default {
   name: "Server",
   components: {
     ChannelList,
     MessageBoard,
-    ServerList
+    ServerList,
+    UserList
   },
   data: () => ({
     server: null,

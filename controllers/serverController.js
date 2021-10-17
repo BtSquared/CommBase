@@ -13,6 +13,7 @@ const getServerById = async (req, res) => {
 }
 
 const getServerUsers = async (req, res) => {
+  console.log(req.body)
   let usersList = req.body.userList.map((user) => {
     return ObjectId(user)
   })

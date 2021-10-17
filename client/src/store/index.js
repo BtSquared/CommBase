@@ -10,6 +10,9 @@ export default new Vuex.Store({
   mutations: {
     setUser(state, user) {
       state.user = user
+    },
+    addServer(state, server) {
+      state.user.servers.push(server)
     }
   }
 })

@@ -34,18 +34,29 @@ export default {
     }
   },
   async mounted() {
-    let servers = this.user.servers
-    for(let i = 0; i < servers.length; i++) {
-      const res = await Client.get('/server/findserver', {
-      params: {
-        serverId: servers[i]
-      }
-    })
-      this.servers.push({
-        _id: res.data._id,
-        serverName: res.data.serverName,
-        serverIcon: res.data.serverIcon
+    this.fetchServerInfo()
+  },
+  watch: {
+    'user.servers': 'fetchServerInfo'
+  },
+  methods: {
+    async fetchServerInfo() {
+        this.servers = []
+        let collection = []
+        let servers = this.user.servers
+      for(let i = 0; i < servers.length; i++) {
+        const res = await Client.get('/server/findserver', {
+        params: {
+          serverId: servers[i]
+        }
       })
+        collection.push({
+          _id: res.data._id,
+          serverName: res.data.serverName,
+          serverIcon: res.data.serverIcon
+        })
+      }
+      this.servers = collection
     }
   }
 }

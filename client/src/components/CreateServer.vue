@@ -2,12 +2,14 @@
   <div>
     <div>
       <h1>Create a Sever</h1>
-      <input 
-        @input="handleChange"
-        :value="serverName"
-        placeholder="Server Name"
-      />
-      <button @click="handleSubmit">Create</button>
+      <form @submit.prevent="handleSubmit">
+        <input 
+          @input="handleChange"
+          :value="serverName"
+          placeholder="Server Name"
+        />
+        <button type="Submit" :disabled="serverName === ''">Create</button>
+      </form>
     </div>
   </div>
 </template>
@@ -30,11 +32,14 @@ export default {
       this.serverName = e.target.value
     },
     async handleSubmit() {
+      if(this.serverName === ''){
+        return
+      }
       const server = await Cleint.post('/server/createserver', {
         serverName: this.serverName,
         userId: this.user._id
       })
-      
+      this.$store.commit('addServer', server.data._id)
       this.$router.push({
         name: 'server',
         params: {

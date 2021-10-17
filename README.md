@@ -31,3 +31,5 @@ a platform for all your communication needs with user created and maintained ser
 
 ***Credits***
 
+- server defualt icon made by <a href="https://www.flaticon.com/authors/webalys" title="Webalys">Webalys</a> from www.flaticon.com
+- user defualt icon made by <a href="https://www.flaticon.com/authors/flat-icons" title="Flat Icons">Flat Icons</a> from www.flaticon.com

@@ -9,7 +9,10 @@ const User = new Schema(
     servers: { type: Array, required: false, default: [] },
     roles: { type: Array, required: false, default: [] },
     bio: { type: String, required: false, default: '' },
-    profilePicture: { type: String, required: false, default: 'default pfp' },
+    profilePicture: {
+      type: String,
+      default: 'https://d34y6rgwiibafg.cloudfront.net/default/avatar.png'
+    },
     banner: { type: String, required: false, default: 'default banner' }
   },
   {

@@ -9,7 +9,11 @@ const Server = new Schema(
     inviteCode: { type: String, required: true },
     whiteList: { type: Array, default: [] },
     blackList: { type: Array, default: [] },
-    channels: [Channel]
+    channels: [Channel],
+    serverIcon: {
+      type: String,
+      default: 'https://d34y6rgwiibafg.cloudfront.net/default/servericon.png'
+    }
   },
   {
     timestamps: true

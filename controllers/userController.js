@@ -33,8 +33,7 @@ const uploadAvatar = async (req, res) => {
       ContentLength: file.size,
       ContentType: file.mimetype
     }
-    let fileUrl = await uploader.upload(fileParams)
-    console.log(fileUrl)
+    await uploader.upload(fileParams)
     const user = await User.find(req.body.userId)
     user.profilePicture = `https://d34y6rgwiibafg.cloudfront.net/${fileName}`
     user.save()

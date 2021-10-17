@@ -19,8 +19,22 @@
             placeholder="Email" 
             required
           />
-          <input @input="handleChange" type="password" :value="formData.password" name="password" placeholder="Password" required/>
-          <input @input="handleChange" type="password" :value="formData.confrimPassword" name="confrimPassword" placeholder="Confrim Password" required/>
+          <input 
+            @input="handleChange" 
+            type="password" 
+            :value="formData.password" 
+            name="password" 
+            placeholder="Password" 
+            required
+          />
+          <input 
+            @input="handleChange" 
+            type="password" 
+            :value="formData.confrimPassword" 
+            name="confrimPassword" 
+            placeholder="Confrim Password" 
+            required
+          />
           <button type="submit" :disabled="formData.password != formData.confrimPassword">Submit</button>
       </form>
     </div>

@@ -98,9 +98,3 @@ module.exports = {
   UpdatePassword,
   CheckSession
 }
-
-// const createUser = async (req, res) => {
-//   const user = await new User({ ...req.body })
-//   await user.save()
-//   res.send({ user })
-// }

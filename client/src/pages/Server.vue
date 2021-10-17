@@ -3,13 +3,13 @@
     <div>
       <ServerList />
     </div>
-    <ChannelList 
+    <ChannelList v-if="channels"
       @changeChannel="changeChannel" 
       :serverId="server._id" 
       :channels="server.channels"
     />
     <div>
-      <MessageBoard 
+      <MessageBoard v-if="selectedChannel"
         :serverId="server._id" 
         :channelName="selectedChannel.name" 
         :channelId="selectedChannel._id" 
@@ -33,9 +33,9 @@ export default {
     ServerList
   },
   data: () => ({
-    server: {},
-    channels: [],
-    selectedChannel: {}
+    server: null,
+    channels: null,
+    selectedChannel: null
   }),
   computed: {
     user () {

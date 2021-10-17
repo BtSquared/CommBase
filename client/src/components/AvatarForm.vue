@@ -19,7 +19,7 @@ export default {
   name: 'AvatarForm',
   data: () => ({
     formData: {
-      userId: '6169eb028088b19f16a9607e',
+      userId: 'default',
       avatar: ''
     }
   }),

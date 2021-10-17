@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div v-for="channel in channels" :key="channel._id">
-      <div @click="handleClick(channel)">
-        {{channel.name}}
+    <div id="container">
+      <div v-for="channel in channels" :key="channel._id">
+        <div @click="handleClick(channel)">
+          {{channel.name}}
+        </div>
       </div>
     </div>
   </div>
@@ -30,3 +32,18 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+#container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(86, 86, 86);
+  padding: 5px;
+  position: absolute;
+  left: 90px;
+  top: 0px;
+  width: 240px;
+  height: 100%;
+  color: white;
+}
+</style>

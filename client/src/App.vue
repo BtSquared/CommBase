@@ -7,6 +7,21 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: "App",
+  components: {
+    
+  },
+  created() {
+    const token = localStorage.getItem("token")
+    if (token) {
+      this.checkSession()
+    }
+  }
+}
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

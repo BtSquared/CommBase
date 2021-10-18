@@ -7,15 +7,6 @@
 <script>
 export default {
   name: "App",
-  components: {
-    
-  },
-  // created() {
-  //   const token = localStorage.getItem("token")
-  //   if (token) {
-  //     this.checkSession()
-  //   }
-  // }
 }
 </script>
 

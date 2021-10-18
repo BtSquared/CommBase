@@ -27,6 +27,10 @@
         <Register />
       </div>
     </div>
+    <div class="ref">
+      <div>server defualt icon made by <a href="https://www.flaticon.com/authors/webalys" title="Webalys">Webalys</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+      <div>user defualt icon made by <a href="https://www.flaticon.com/authors/flat-icons" title="Flat Icons">Flat Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    </div>
   </div>
 </template>
 
@@ -76,5 +80,10 @@ export default {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+.ref {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
 }
 </style>

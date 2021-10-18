@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h1>Create a Sever</h1>
+      <h3 class="header">Create a Sever</h3>
       <form @submit.prevent="handleSubmit">
         <input 
           @input="handleChange"
@@ -46,7 +46,17 @@ export default {
           serverId: server.data._id
         }
       })
+      this.serverName = ''
     }
   }
 }
 </script>
+
+<style scoped>
+h3 {
+  margin: 20px 0 10px 0;
+}
+button{
+  margin: 0 0 0 10px;
+}
+</style>

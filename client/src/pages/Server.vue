@@ -7,6 +7,7 @@
         :serverId="server._id"
         :serverName="server.serverName" 
         :channels="server.channels"
+        :inviteCode="server.inviteCode"
       />
       <MessageBoard v-if="selectedChannel"
         :serverId="server._id" 
@@ -56,6 +57,10 @@ export default {
         } else {
           this.$store.commit('setUser', res.data.user)
         }
+      } else {
+        this.$router.push({
+        name: 'Home'
+      })
       }
     }
     await this.fetchServer()

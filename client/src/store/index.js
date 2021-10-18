@@ -13,6 +13,9 @@ export default new Vuex.Store({
     },
     addServer(state, server) {
       state.user.servers.push(server)
+    },
+    LogOutUser(state) {
+      state.user = null
     }
   }
 })

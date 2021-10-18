@@ -30,5 +30,6 @@ img {
 }
 .ULCimg {
   margin: 0 7px 0 0;
+  border-radius: 15px;
 }
 </style>

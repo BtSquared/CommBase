@@ -10,6 +10,7 @@ const Server = new Schema(
     whiteList: { type: Array, default: [] },
     blackList: { type: Array, default: [] },
     channels: [Channel],
+    deleteable: { type: Boolean, default: true },
     serverIcon: {
       type: String,
       default: 'https://d34y6rgwiibafg.cloudfront.net/default/servericon.png'

@@ -4,7 +4,7 @@
       <input 
         @input="handleChange" 
         type="file"
-        name="icon"
+        name="serverIcon"
         placeholder="Server Icon"
       />
       <button type="Submit">Submit</button>
@@ -19,7 +19,7 @@ export default {
   data: () => ({
     formData: {
       serverId: '',
-      icon: ''
+      serverIcon: ''
     }
   }),
   mounted() {
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     handleChange(e){
-      this.formData.icon = e.target.files[0]
+      this.formData.serverIcon = e.target.files[0]
     },
     async handleSubmit() {
       await this.$emit('handleIconSubmit', this.formData)

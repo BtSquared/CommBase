@@ -3,40 +3,60 @@
     <div class="CLGridCon">
       <div id="container">
         <div v-if="update">
-          <h2>update server Icon</h2>
+          <button v-if="Delete" class="delete" @click="handleDeleteSubmit">ARE YOU SURE?</button>
+          <button v-else class="delete" @click="toggleDeleteButton">Delete Server</button>
+          <h4>update server Icon</h4>
           <ServerIconForm @handleIconSubmit="handleIconSubmit"/>
         </div>
         <div v-else class="flex">
-          <h2>{{serverName}}</h2>
+          <h4>{{serverName}}</h4>
           <button @click="toggleUpdateButton">Settings</button>
         </div>
+        <h5>Server Invite Code: {{inviteCode}}</h5>
         <div v-for="channel in channels" :key="channel._id">
           <div @click="handleClick(channel)" class="channels">
             # {{channel.name}}
           </div>
+        </div>
+        <CreateServer class="create"/>
+        <JoinServer class="create"/>
+        <div>
+          <button v-if="user" @click="handleLogOut">LogOut</button>
+          <button v-else>Login</button>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script>    
 import Client from '../services/api'
 import ServerIconForm from '../subComponents/ServerIconForm.vue'
+import CreateServer from './CreateServer.vue'
+import JoinServer from './JoinServer.vue'
 
 export default { 
   name: "ServerChannelList",
   components: {
-    ServerIconForm
+    ServerIconForm,
+    CreateServer,
+    JoinServer
   },
   props: {
     serverId: String,
     serverName: String,
-    channels: Array
+    channels: Array,
+    inviteCode: String
   },
   data:() => ({
-    update: false
+    update: false,
+    Delete: false
   }),
+  computed: {
+    user () {
+      return this.$store.state.user
+    }
+  },
   watch: {
     '$route.params.serverId': 'toggleUpdateRoute'
   },
@@ -64,24 +84,58 @@ export default {
       await Client.put(`/server/updateicon`, formData)
       this.update = false
     },
+    async handleDeleteSubmit() {
+      await Client.delete('/server/deleteserver', {
+        params: {
+          serverId: this.serverId, 
+          userId: this.user._id
+        }
+      })
+    },
     toggleUpdateButton() {
       this.update = true
     },
     toggleUpdateRoute() {
       this.update = false
+    },
+    toggleDeleteButton() {
+      this.Delete = true
+    },
+    toggleDeleteRoute() {
+      this.Delete = false
+    },
+    handleLogOut() {
+      this.$store.commit('LogOutUser')
+      localStorage.removeItem('token')
+      this.$router.push({
+        name: 'Home'
+      })
+      location.reload()
     }
   }
 }
 </script>
 
 <style scoped>
-h2{
+h4 {
   margin: 5px 0 5px 20px;
+}
+h5 {
+  margin: 0;
+  text-align: center;
 }
 button {
 height: 20px;
 align-self: center;
 margin: 5px 20px 5px 0;
+}
+.create{
+  justify-self: flex-end;
+  margin: 10px;
+}
+.delete {
+  background-color: rgb(234, 47, 47);
+  color: white;
 }
 .flex{
   display: flex;

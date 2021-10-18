@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h1>Join a Sever</h1>
+      <h3>Join a Sever</h3>
       <form @submit.prevent="handleSubmit">
         <input 
           @input="handleChange"
@@ -35,7 +35,7 @@ export default {
       if(this.serverCode === ''){
         return
       }
-      const server = await Client.post(`/server/invite/${serverCode}`, {
+      const server = await Client.post(`/server/invite/${this.serverCode}`, {
         userId: this.user._id
       })
       this.$store.commit('addServer', server.data._id)
@@ -49,3 +49,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+h3 {
+  margin: 20px 0 10px 0;
+}
+button{
+  margin: 0 0 0 10px;
+}
+</style>

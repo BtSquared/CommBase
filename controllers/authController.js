@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const { User, Server } = require('../models')
 const middleware = require('../middleware/auth')
 
 const Login = async (req, res) => {
@@ -32,6 +32,24 @@ const Register = async (req, res) => {
     const { email, password, displayName } = req.body
     let passwordDigest = await middleware.hashPassword(password)
     const user = await new User({ email, passwordDigest, displayName })
+    const makeCode = () => {
+      let code = ''
+      const characters = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`
+      for (let i = 0; i < 10; i++) {
+        code += characters.charAt(Math.floor(Math.random() * characters.length))
+      }
+      return code
+    }
+    const server = await new Server({
+      owner: user._id,
+      serverName: 'My First Server',
+      inviteCode: makeCode(),
+      channels: [{ name: 'general' }],
+      deleteable: false
+    })
+    server.whiteList.push(user._id)
+    server.save()
+    user.servers.push(server._id)
     user.save()
     res.send(user)
   } catch (error) {

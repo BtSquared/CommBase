@@ -59,12 +59,15 @@ export default {
       this.formData[e.target.name] = e.target.value
     },
     async handleSubmit() {
-      const res = await Client.post('/auth/register', {
+      await Client.post('/auth/register', {
         displayName: this.formData.displayName,
         email: this.formData.email,
         password: this.formData.password
         })
-      console.log(res)
+      this.formData.displayName = ''
+      this.formData.email = ''
+      this.formData.password = ''
+      this.formData.confrimPassword = ''
     }
   }
 }

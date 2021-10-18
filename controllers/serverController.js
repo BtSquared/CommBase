@@ -15,20 +15,22 @@ const getServerById = async (req, res) => {
 }
 
 const getServerUsers = async (req, res) => {
-  let usersList = req.body.userList.map((user) => {
-    return ObjectId(user)
-  })
-  const users = await User.find({ _id: { $in: usersList } })
-  let list = []
-  for (let i = 0; i < users.length; i++) {
-    let userInfo = {
-      _id: users[i].id,
-      displayName: users[i].displayName,
-      profilePicture: users[i].profilePicture
+  if (req.body.userList) {
+    let usersList = req.body.userList.map((user) => {
+      return ObjectId(user)
+    })
+    const users = await User.find({ _id: { $in: usersList } })
+    let list = []
+    for (let i = 0; i < users.length; i++) {
+      let userInfo = {
+        _id: users[i].id,
+        displayName: users[i].displayName,
+        profilePicture: users[i].profilePicture
+      }
+      list.push(userInfo)
     }
-    list.push(userInfo)
+    res.send(list)
   }
-  res.send(list)
 }
 
 const createServer = async (req, res) => {
@@ -101,18 +103,28 @@ const updateServerIcon = async (req, res) => {
 }
 
 const deleteServer = async (req, res) => {
-  await Server.findByIdAndDelete(req.body.serverId)
-  const users = await User.find({ $in: req.body.serverId })
-  for (let i = 0; i < users.length; i++) {
-    let user = await User.findById(users[i]._id)
-    let index = user.servers.indexOf(req.body.serverId)
-    if (index === -1) {
-    } else {
-      user.servers.splice(index, 1)
-      user.save()
+  const server = await Server.findById(req.query.serverId)
+  console.log(req.query)
+  if (
+    req.query.userId.toString() === server.owner.toString() &&
+    server.deleteable === true
+  ) {
+    await Server.findByIdAndDelete(req.query.serverId)
+    const users = await User.find({ $in: [req.query.serverId] })
+    for (let i = 0; i < users.length; i++) {
+      let user = await User.findById(users[i]._id)
+      let index = user.servers.indexOf(req.query.serverId)
+      if (index === -1) {
+      } else {
+        user.servers.splice(index, 1)
+        user.save()
+      }
     }
+    res.send(`server with the ID of ${req.query.serverId} deleted`)
   }
-  res.send(`server with the ID of ${req.body.serverId} deleted`)
+  console.log(
+    `not the owner your ID ${req.query.userId} owner ID ${server.owner}`
+  )
 }
 
 module.exports = {

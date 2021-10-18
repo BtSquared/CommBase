@@ -2,14 +2,14 @@
   <div>
     <div class="MBCon">
       <div id="postsCon">
-          <PostCard class="post"
-            v-for="post in posts" 
-            :key="post._id" 
-            :postId="post._id" 
-            :content="post.content"
-            @handlePostEdit="handlePostEdit"
-            @handlePostDelete="handlePostDelete"
-          />
+        <PostCard
+          v-for="post in posts" 
+          :key="post._id" 
+          :postId="post._id" 
+          :content="post.content"
+          @handlePostEdit="handlePostEdit"
+          @handlePostDelete="handlePostDelete"
+        />
       </div>
       <div id="form">
         <PostForm 
@@ -87,9 +87,6 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-}
-.post{
-
 }
 #postsCon {
   background-color: rgb(114, 114, 114);

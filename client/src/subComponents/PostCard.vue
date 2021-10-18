@@ -2,8 +2,6 @@
   <div v-if="deleted === false" class="postCard">
       <input v-if="editMode" class="edit" @input="handleChange" :value="content">
       <div v-else class="postcontent">
-        <!-- <img /> -->
-        <!-- <h2>{{userName}}</h2> -->
         <p>{{content}}</p>
       </div>
     <div class="buttonDiv">
@@ -24,7 +22,6 @@
 export default {
   name: "PostCard",
   props: {
-    // userName: String,
     postId: String,
     content: String
   },
